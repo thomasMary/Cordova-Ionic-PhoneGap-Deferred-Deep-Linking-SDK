@@ -9,6 +9,7 @@
 		<clobbers target="Branch" />
 	</js-module>
 
+	<preference name="URL_SCHEME" />
 
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
