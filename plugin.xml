@@ -8,6 +8,8 @@
 		<clobbers target="branch" />
 		<clobbers target="Branch" />
 	</js-module>
+
+
 	<platform name="ios">
 		<config-file target="config.xml" parent="/*">
 			<feature name="BranchDevice">
@@ -15,11 +17,25 @@
 				<param name="onload" value="true" />
 			</feature>
 		</config-file>
+
+		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
+	      	<array>
+	        	<dict>
+	          		<key>CFBundleURLSchemes</key>
+	          		<array>
+	            		<string>$URL_SCHEME</string>
+	          		</array>
+	        	</dict>
+	      	</array>
+	    </config-file>
+
 		<header-file src="cordova-src/ios/AppDelegate+BNCDevice.h" />
 		<source-file src="cordova-src/ios/AppDelegate+BNCDevice.m" />
 		<header-file src="cordova-src/ios/BNCDevice.h" />
 		<source-file src="cordova-src/ios/BNCDevice.m" />
 	</platform>
+
+
 	<platform name="android">
 		<config-file target="config.xml" parent="/*">
 			<feature name="BranchDevice">
@@ -27,6 +43,17 @@
 				<param name="onload" value="true" />
 			</feature>
 		</config-file>
+		
+		<config-file target="AndroidManifest.xml" parent="/*/application/activity">
+	      	<intent-filter>
+		        <data android:scheme="$URL_SCHEME"/>
+		        <action android:name="android.intent.action.VIEW" />
+		        <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+	      	</intent-filter>
+    	</config-file>
+
 		<source-file src="cordova-src/android/BranchDevice.java" target-dir="src/io/branch" />
 	</platform>
+
 </plugin>
